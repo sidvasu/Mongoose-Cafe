@@ -24,10 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <button class="delete-btn">🗑️</button>
       <img src="${item.image}" class="item-img">
       <h2>${item.name}</h2>
-      <h3>Ingredients</h3>
-      <ul>
-        ${item.ingredients.map(i => `<li>${i}</li>`).join("")}
-      </ul>
+      <p class="ingredients-text">${item.ingredients.join(", ")}</p>
     `;
 
     card.querySelector(".delete-btn").addEventListener("click", () => {
@@ -60,10 +57,7 @@ document.getElementById("addBtn").addEventListener("click", () => {
       <button class="delete-btn">🗑️</button>
       <img src="${imgSrc}" class="item-img">
       <h2>${name}</h2>
-      <h3>Ingredients</h3>
-      <ul>
-        ${ingredients.split(",").map(i => `<li>${i.trim()}</li>`).join("")}
-      </ul>
+      <p class="ingredients-text">${ingredients}</p>
     `;
 
     card.querySelector(".delete-btn").addEventListener("click", () => {
