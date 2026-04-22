@@ -46,11 +46,6 @@ body {
   margin-bottom: 6px; /* tighter spacing */
 }
 
-.item-grid > :nth-child(odd):last-child {
-  grid-column: 1 / -1;   /* span both columns */
-  justify-self: center;  /* center the card */
-}
-
 .ingredients-text {
   margin-top: 4px; /* closer to the title */
 }
