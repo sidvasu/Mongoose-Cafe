@@ -1,18 +1,81 @@
-import express from "express";
-import { fileURLToPath } from 'url';
-import { dirname, join } from 'path';
+// Mock data (for testing)
+const mockItems = [
+  {
+    name: "Test Boba",
+    ingredients: ["Milk tea", "Tapioca pearls"],
+    image: "https://via.placeholder.com/60"
+  },
+  {
+    name: "Test Donut",
+    ingredients: ["Flour", "Sugar", "Glaze"],
+    image: "https://via.placeholder.com/60"
+  }
+];
 
-const app = express();
-const port = 3000;
+// Render mock items on page load
+document.addEventListener("DOMContentLoaded", () => {
+  const grid = document.getElementById("itemGrid");
 
-// Define __dirname in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+  mockItems.forEach(item => {
+    const card = document.createElement("div");
+    card.classList.add("item-card");
 
-app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, 'index.html'));
+    card.innerHTML = `
+      <button class="delete-btn">🗑️</button>
+      <img src="${item.image}" class="item-img">
+      <h2>${item.name}</h2>
+      <h3>Ingredients</h3>
+      <ul>
+        ${item.ingredients.map(i => `<li>${i}</li>`).join("")}
+      </ul>
+    `;
+
+    card.querySelector(".delete-btn").addEventListener("click", () => {
+      card.remove();
+    });
+
+    grid.appendChild(card);
+  });
 });
+// End of mock data (for testing)
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+document.getElementById("addBtn").addEventListener("click", () => {
+  const name = document.getElementById("nameInput").value;
+  const ingredients = document.getElementById("ingredientsInput").value;
+  const imageFile = document.getElementById("imageInput").files[0];
+
+  if (!name || !ingredients || !imageFile) {
+    alert("Please fill out all fields.");
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const imgSrc = e.target.result;
+
+    const card = document.createElement("div");
+    card.classList.add("item-card");
+
+    card.innerHTML = `
+      <button class="delete-btn">🗑️</button>
+      <img src="${imgSrc}" class="item-img">
+      <h2>${name}</h2>
+      <h3>Ingredients</h3>
+      <ul>
+        ${ingredients.split(",").map(i => `<li>${i.trim()}</li>`).join("")}
+      </ul>
+    `;
+
+    card.querySelector(".delete-btn").addEventListener("click", () => {
+      card.remove();
+    });
+
+    document.getElementById("itemGrid").appendChild(card);
+  };
+
+  reader.readAsDataURL(imageFile);
+
+  document.getElementById("nameInput").value = "";
+  document.getElementById("ingredientsInput").value = "";
+  document.getElementById("imageInput").value = "";
 });
