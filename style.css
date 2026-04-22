@@ -4,7 +4,7 @@ h1 {
 
 body {
   font-family: sans-serif;
-  background: #fafafa;
+  background: #f7f3ee;
   padding: 40px;
 }
 
@@ -24,7 +24,7 @@ body {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(107, 79, 58, 0.15);
 }
 
 .delete-btn {
@@ -40,7 +40,7 @@ body {
 }
 
 .delete-btn:hover {
-  color: #ff4fa3;
+  color: #ffa230;
 }
 
 .item-img {
@@ -55,7 +55,7 @@ body {
   background: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(107, 79, 58, 0.15);
 }
 
 label {
@@ -75,7 +75,7 @@ input, textarea {
 button {
   margin-top: 20px;
   padding: 12px 20px;
-  background: #ff4fa3;
+  background: #ff8c00;
   color: white;
   border: none;
   border-radius: 6px;
@@ -84,5 +84,5 @@ button {
 }
 
 button:hover {
-    background: #ff7bbd;
+    background: #ffa230;
 }
