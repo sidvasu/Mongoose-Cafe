@@ -1,3 +1,19 @@
+// Adds a card
+function appendCard(item) {
+  const card = document.createElement("div");
+  card.classList.add("item-card");
+  card.dataset.id = item._id;
+
+  card.innerHTML = `
+    <button class="delete-btn">🗑️</button>
+    <img src="${item.imgSrc}" class="item-img">
+    <h2>${item.name}</h2>
+    <p class="ingredients-text">${item.ingredients}</p>
+  `;
+
+  document.getElementById("itemGrid").appendChild(card);
+}
+
 // Adds a menu item
 document.getElementById("addBtn").addEventListener("click", () => {
 
@@ -11,21 +27,14 @@ document.getElementById("addBtn").addEventListener("click", () => {
     return;
   }
 
-  // Sets card HTML content
-  const card = document.createElement("div");
-  card.classList.add("item-card");
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const imgSrc = e.target.result;
+    const item = { name, ingredients, imgSrc };
+    appendCard(item);
+  }
 
-  const imgSrc = URL.createObjectURL(imageFile);
-
-  card.innerHTML = `
-    <button class="delete-btn">🗑️</button>
-    <img src="${imgSrc}" class="item-img">
-    <h2>${name}</h2>
-    <p class="ingredients-text">${ingredients}</p>
-  `;
-
-  // Adds card element to the grid
-  document.getElementById("itemGrid").appendChild(card);
+  reader.readAsDataURL(imageFile);
 
   // Resets form
   document.getElementById("nameInput").value = "";
@@ -37,7 +46,6 @@ document.getElementById("addBtn").addEventListener("click", () => {
 document.getElementById("itemGrid").addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-btn")) {
     const card = e.target.closest(".item-card");
-    URL.revokeObjectURL(card.querySelector(".item-img").src);
     card.remove();
   }
 });
