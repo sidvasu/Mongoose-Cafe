@@ -9,8 +9,10 @@ const port = 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+app.use(express.static(join(__dirname, 'public')));
+
 app.get("/", (req, res) => {
-    res.sendFile(join(__dirname, 'index.html'));
+    res.sendFile(join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(port, () => {
